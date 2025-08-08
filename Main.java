@@ -1,17 +1,66 @@
 import employee.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         ArrayList<Employee> emplist = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
 
-        emplist.add(new Programmer("Rohit", "AB302", "Kerela", "rohit@gmail.com", "2025", 30000));
-        emplist.add(new Asstprof("Rahul", "D110", "Chennai", "rahul@gmail.com", "2116", 40000));
-        emplist.add(new Asscprof("Karthik", "A114", "Bangalore", "karthik@gmail.com", "2209", 50000));
-        emplist.add(new Prof("Hari", "C109", "Goa", "hari@gmail.com", "2304", 60000));
+        System.out.println("Enter details for one employee:");
 
+        System.out.println("Select employee type:");
+        System.out.println("1. Programmer");
+        System.out.println("2. Assistant Professor (Asstprof)");
+        System.out.println("3. Associate Professor (Asscprof)");
+        System.out.println("4. Professor");
+
+        System.out.print("Enter choice (1-4): ");
+        int choice = sc.nextInt();
+        sc.nextLine(); // consume leftover newline
+
+        System.out.print("Enter empname: ");
+        String empname = sc.nextLine();
+
+        System.out.print("Enter EmpID: ");
+        String empid = sc.nextLine();
+
+        System.out.print("Enter Address: ");
+        String address = sc.nextLine();
+
+        System.out.print("Enter mail: ");
+        String mail = sc.nextLine();
+
+        System.out.print("Enter Employee Number: ");
+        String mobno = sc.nextLine();
+
+        System.out.print("Enter Salary: ");
+        double salary = sc.nextDouble();
+
+        // Create the employee object based on numeric choice
+        switch (choice) {
+            case 1:
+                emplist.add(new Programmer(empname, empid, address, mail, mobno, salary));
+                break;
+            case 2:
+                emplist.add(new Asstprof(empname, empid, address, mail, mobno, salary));
+                break;
+            case 3:
+                emplist.add(new Asscprof(empname, empid, address, mail, mobno, salary));
+                break;
+            case 4:
+                emplist.add(new Prof(empname, empid, address, mail, mobno, salary));
+                break;
+            default:
+                System.out.println("Invalid choice. No employee added.");
+                break;
+        }
+
+        System.out.println("\n--- Payslip ---");
         for (Employee emp : emplist) {
             emp.payslip();
-        } 
+        }
+
+        sc.close();
     }
 }
